@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">School Application</string>
+    <string name="welcom_note">WelCome to PMS</string>
+    <string name="login_here">Login Here</string>
+    <string name="username">User Name:</string>
+    <string name="password">Password:</string>
+    <string name="login">Login:</string>
+    <string name="sname">Name:</string>
+    <string name="sfather">Father Name:</string>
+    <string name="srollno">Roll No:</string>
+    <string name="saddress">Address:</string>
+    <string name="scontact">Contact No:</string>
+</resources>
