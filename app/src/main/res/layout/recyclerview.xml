@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/HEX"
+    android:orientation="vertical"
     >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
     <TextView
         android:id="@+id/snm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
+        android:layout_width="59dp"
+        android:layout_alignParentLeft="true"
+        android:layout_height="30sp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10sp"
         android:text="@string/sname"
         android:textColor="@color/gray"
         android:textSize="20sp"
@@ -17,9 +26,12 @@
         />
         <TextView
             android:id="@+id/shownm"
-            android:layout_toRightOf="@+id/snm"
+            android:layout_marginRight="20sp"
             android:textSize="15dp"
-            android:layout_margin="20dp"
+            android:padding="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10sp"
+            android:text="@string/welcom_note"
             android:textColor="@color/gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -29,17 +41,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textColor="@color/gray"
             android:text="@string/srollno"
             />
         <TextView
             android:id="@+id/showrn"
             android:layout_below="@+id/shownm"
-            android:layout_toRightOf="@+id/studentrollno"
-            android:textSize="20dp"
+            android:text="@string/welcom_note"
+            android:padding="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20sp"
+            android:textSize="15dp"
             android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
 </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/gray"
+        android:layout_marginRight="8sp"
+        android:layout_marginLeft="8sp"
+        ></View>
+</LinearLayout>

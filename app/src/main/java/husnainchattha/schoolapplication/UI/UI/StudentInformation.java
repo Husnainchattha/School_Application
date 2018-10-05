@@ -25,7 +25,7 @@ public class StudentInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_information);
         DataBaseHandler handler=new DataBaseHandler(this);
-        List<DataModel> school=handler.getAllAyat();
+        List<DataModel> school=handler.getAllStudent();
         DataModel ayat=new DataModel();
         TextView textView=findViewById(R.id.storname);
         TextView textView1=findViewById(R.id.storfathername);

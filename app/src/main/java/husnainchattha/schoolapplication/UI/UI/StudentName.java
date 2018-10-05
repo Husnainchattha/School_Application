@@ -28,12 +28,44 @@ public class StudentName extends AppCompatActivity {
         setContentView(R.layout.activity_student_name);
         this.context=this;
         DataBaseHandler helper=new DataBaseHandler(this);
-        ArrayList<DataModel> ayats=helper.getAllAyat();
+        ArrayList<DataModel> ayats=helper.getAllStudent();
         recyclerView=findViewById(R.id.recyclerviewid);
         recyclerView.setLayoutManager(new LinearLayoutManager(StudentName.this));
         OurAdapter adapter=new OurAdapter(ayats);
         recyclerView.setAdapter(adapter);
     }
+    public class OurAdapter extends RecyclerView.Adapter<OurAdapter.ViewHolder>{
+        private final ArrayList<DataModel> data;
+        public OurAdapter(ArrayList<DataModel> data) {
+            this.data=data;
+        }
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder( ViewGroup parent, int viewType) {
+            return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview,parent,false));
+        }
+        @Override
+        public void onBindViewHolder( ViewHolder holder, int position) {
+            DataModel ayat=data.get(position);
+            holder.textView.setText(ayat.getName());
+            holder.textView1.setText(ayat.getRollno());
+        }
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+        class ViewHolder extends RecyclerView.ViewHolder{
+            public TextView textView;
+            TextView textView1;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                textView=itemView.findViewById(R.id.shownm);
+                textView1=itemView.findViewById(R.id.showrn);
+            }
+        }
+    }
+    /*
     public class OurAdapter extends RecyclerView.Adapter<OurAdapter.ViewHolder>{
         private final ArrayList<DataModel>data;
         public OurAdapter(ArrayList<DataModel>data){
@@ -65,6 +97,6 @@ public class StudentName extends AppCompatActivity {
                 textrollno=itemView.findViewById(R.id.showrn);
             }
         }
-    }
+    }*/
 
 }
