@@ -2,7 +2,7 @@ package DataBase;
 
 import java.io.Serializable;
 
-public class DataModel implements Serializable {
+public class StudentRecord implements Serializable {
 
     private String name;
     private String fathername;
@@ -10,19 +10,19 @@ public class DataModel implements Serializable {
     private String address;
     private String contact;
 
-    public DataModel(String name, String fathername,  String contact) {
+    public StudentRecord(String name, String fathername, String rollno, String address, String contact) {
         this.name = name;
         this.fathername = fathername;
         this.rollno = rollno;
         this.address = address;
         this.contact = contact;
     }
-    public DataModel(String name,String fathername){
+    public StudentRecord(String name, String rollno){
         this.name=name;
-        this.fathername=fathername;
+        this.fathername=rollno;
     }
 
-    public DataModel() {
+    public StudentRecord() {
         
     }
 

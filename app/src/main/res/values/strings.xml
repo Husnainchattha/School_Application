@@ -10,4 +10,6 @@
     <string name="srollno">Roll No:</string>
     <string name="saddress">Address:</string>
     <string name="scontact">Contact No:</string>
+    <string name="email">Email</string>
+    <string name="not_member">No account yet? Create one</string>
 </resources>

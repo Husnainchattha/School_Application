@@ -1,6 +1,5 @@
 package husnainchattha.schoolapplication.UI.UI;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,14 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DataBase.DataBaseHandler;
-import DataBase.DataModel;
+import DataBase.StudentRecord;
 import husnainchattha.schoolapplication.R;
-
-import static java.security.AccessController.getContext;
 
 public class StudentInformation extends AppCompatActivity {
 
-    ArrayList<DataModel> dataModels;
+    ArrayList<StudentRecord> dataModels;
     SQLiteDatabase msqlitedatabase;
 
     @Override
@@ -25,8 +22,8 @@ public class StudentInformation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_information);
         DataBaseHandler handler=new DataBaseHandler(this);
-        List<DataModel> school=handler.getAllStudent();
-        DataModel ayat=new DataModel();
+        List<StudentRecord> school=handler.getAllStudent();
+        StudentRecord ayat=new StudentRecord();
         TextView textView=findViewById(R.id.storname);
         TextView textView1=findViewById(R.id.storfathername);
        // textView.setText(ayat.getFathername());

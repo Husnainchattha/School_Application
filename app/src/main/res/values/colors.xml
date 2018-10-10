@@ -6,4 +6,5 @@
     <color name="HEX">#2E4053</color>
     <color name="white">#ffffff</color>
     <color name="gray">#99A3A4</color>
+    <color name="background">#f44242</color>
 </resources>

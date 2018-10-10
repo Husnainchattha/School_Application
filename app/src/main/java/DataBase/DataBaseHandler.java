@@ -3,13 +3,15 @@ package DataBase;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.hardware.camera2.CaptureRequest;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static DataBase.Tables.SignUp.COLUMN_USER_EMAIL;
+import static DataBase.Tables.SignUp.COLUMN_USER_NAME;
+import static DataBase.Tables.SignUp.COLUMN_USER_PASSWORD;
+import static DataBase.Tables.SignUp.TABLE_NAME;
 
 
 public class DataBaseHandler extends SQLiteOpenHelper {
@@ -26,17 +28,21 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                     Tables.Admin._ID + " TEXT PRIMARY KEY, " +
                     Tables.Admin.COLUMN_ADMINNAME + " TEXT, " +
                     Tables.Admin.COLUMN_ADMINPASSWORD + " TEXT )";
+    public static final String CREATE_TABLE_SIGNUP =
+            " CREATE TABLE " + Tables.SignUp.TABLE_NAME + " ( " +
+                    Tables.SignUp.COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    COLUMN_USER_NAME + " TEXT," +
+                    COLUMN_USER_EMAIL +  " TEXT," +
+            COLUMN_USER_PASSWORD + " TEXT" + ")";
 
     public DataBaseHandler(Context context) {
         super(context,"newsdb",null,1);
     }
-
-
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        sqLiteDatabase.execSQL(CREATE_TABLE_SIGNUP);
         sqLiteDatabase.execSQL(CREATE_TABLE_STUDENTRECORD);
         sqLiteDatabase.execSQL(CREATE_TABLE_ADMINRECORD);
-
     }
 
     @Override
@@ -44,15 +50,24 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         onCreate(db);
 
     }
-    public void saveStudentRecord(String name,String fathername,String rollno,String address,String phonno ){
+    public void saveStudentRecord(String name,String fathername,String rolno,String address,String contact){
         SQLiteDatabase db=getWritableDatabase();
         ContentValues values=new ContentValues();
         values.put(Tables.Student.COLUMN_TITLEN,name);
         values.put(Tables.Student.COLUMN_TITLEF,fathername);
-        values.put(Tables.Student.COLUMN_TITLEF,rollno);
-        //values.put(Tables.Student.COLUMN_TITLEA,address);
-        //values.put(Tables.Student.COLUMN_TITLEC,phonno);
+        values.put(Tables.Student.COLUMN_TITLER,rolno);
+       // values.put(Tables.Student.COLUMN_TITLEA,address);
+       // values.put(Tables.Student.COLUMN_TITLEC,phonno);
         db.insert(Tables.Student.TABLE_NAME,null,values);
+    }
+    public void addUser(SignupDataModel user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER_NAME, user.getName());
+        values.put(COLUMN_USER_EMAIL, user.getEmail());
+        values.put(COLUMN_USER_PASSWORD, user.getPassword());
+        db.insert(Tables.SignUp.TABLE_NAME, null, values);
+        db.close();
     }
     public void saveAdminRecord(String aname,String apassword){
         SQLiteDatabase data=getWritableDatabase();
@@ -60,6 +75,22 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         values.put(Tables.Admin.COLUMN_ADMINNAME,aname);
         values.put(Tables.Admin.COLUMN_ADMINPASSWORD,apassword);
         data.insert(Tables.Admin.TABLE_NAME,null,values);
+    }
+    public ArrayList<SignupDataModel>getAllUser(){
+        ArrayList<SignupDataModel> user=new ArrayList <>();
+        SQLiteDatabase db=getWritableDatabase();
+        String [] selection={Tables.SignUp.COLUMN_USER_NAME,Tables.SignUp.COLUMN_USER_PASSWORD};
+        Cursor cursor=db.query(Tables.Admin.TABLE_NAME,selection,null,null,null,null,null);
+        while (cursor.moveToNext()){
+            SignupDataModel obj=new SignupDataModel();
+            obj.setName(cursor.getString(0));
+            obj.setEmail(cursor.getString(1));
+            obj.setPassword(cursor.getString(2));
+            user.add(obj);
+        }
+        cursor.close();
+        return user;
+        
     }
     public ArrayList<AdminDataModel>getAllAdmin(){
         ArrayList<AdminDataModel> nobles=new ArrayList <>();
@@ -75,21 +106,21 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return nobles;
     }
-    public ArrayList<DataModel> getAllStudent(){
-        ArrayList<DataModel> ayat=new ArrayList <>();
+    public ArrayList<StudentRecord> getAllStudent(){
+        ArrayList<StudentRecord> student=new ArrayList <>();
         SQLiteDatabase db=getWritableDatabase();
 
-        String[] selection = {Tables.Student.COLUMN_TITLEN,Tables.Student.COLUMN_TITLEF};
+        String[] selection = {Tables.Student.COLUMN_TITLER,Tables.Student.COLUMN_TITLEN};
 
         Cursor cursor = db.query(Tables.Student.TABLE_NAME, selection, null, null, null, null,null);
         while (cursor.moveToNext()) {
-            DataModel ayat1 = new DataModel();
-            ayat1.setName(cursor.getString(0));
-            ayat1.setFathername(cursor.getString(1));
-            ayat.add(ayat1);
+            StudentRecord obj = new StudentRecord();
+            obj.setName(cursor.getString(0));
+            obj.setFathername(cursor.getString(1));
+            student.add(obj);
         }
         cursor.close();
-        return ayat;
+        return student;
     }
 
 }
