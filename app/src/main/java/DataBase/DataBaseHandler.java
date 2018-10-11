@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 import static DataBase.Tables.SignUp.COLUMN_USER_EMAIL;
+import static DataBase.Tables.SignUp.COLUMN_USER_ID;
 import static DataBase.Tables.SignUp.COLUMN_USER_NAME;
 import static DataBase.Tables.SignUp.COLUMN_USER_PASSWORD;
 import static DataBase.Tables.SignUp.TABLE_NAME;
@@ -30,7 +31,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                     Tables.Admin.COLUMN_ADMINPASSWORD + " TEXT )";
     public static final String CREATE_TABLE_SIGNUP =
             " CREATE TABLE " + Tables.SignUp.TABLE_NAME + " ( " +
-                    Tables.SignUp.COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    COLUMN_USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     COLUMN_USER_NAME + " TEXT," +
                     COLUMN_USER_EMAIL +  " TEXT," +
             COLUMN_USER_PASSWORD + " TEXT" + ")";
@@ -76,7 +77,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         values.put(Tables.Admin.COLUMN_ADMINPASSWORD,apassword);
         data.insert(Tables.Admin.TABLE_NAME,null,values);
     }
-    public ArrayList<SignupDataModel>getAllUser(){
+    /*public ArrayList<SignupDataModel>getAllUser(){
         ArrayList<SignupDataModel> user=new ArrayList <>();
         SQLiteDatabase db=getWritableDatabase();
         String [] selection={Tables.SignUp.COLUMN_USER_NAME,Tables.SignUp.COLUMN_USER_PASSWORD};
@@ -91,6 +92,43 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         cursor.close();
         return user;
         
+    }*/
+    public boolean checkUser(String email, String password) {
+
+        // array of columns to fetch
+        String[] columns = {
+                COLUMN_USER_ID
+        };
+        SQLiteDatabase db = this.getReadableDatabase();
+        // selection criteria
+        String selection = COLUMN_USER_EMAIL + " = ?" + " AND " + COLUMN_USER_PASSWORD + " = ?";
+
+        // selection arguments
+        String[] selectionArgs = {email, password};
+
+        // query user table with conditions
+        /**
+         * Here query function is used to fetch records from user table this function works like we use sql query.
+         * SQL query equivalent to this query function is
+         * SELECT user_id FROM user WHERE user_email = 'jack@androidtutorialshub.com' AND user_password = 'qwerty';
+         */
+        Cursor cursor = db.query(CREATE_TABLE_SIGNUP, //Table to query
+                columns,                    //columns to return
+                selection,                  //columns for the WHERE clause
+                selectionArgs,              //The values for the WHERE clause
+                null,                       //group the rows
+                null,                       //filter by row groups
+                null);                      //The sort order
+
+        int cursorCount = cursor.getCount();
+
+        cursor.close();
+        db.close();
+        if (cursorCount > 0) {
+            return true;
+        }
+
+        return false;
     }
     public ArrayList<AdminDataModel>getAllAdmin(){
         ArrayList<AdminDataModel> nobles=new ArrayList <>();

@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void initViews() {
 
-        nestedScrollView = (NestedScrollView) findViewById(R.id.);
+        nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
 
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);
         textInputLayoutPassword = (TextInputLayout) findViewById(R.id.textInputLayoutPassword);
@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
      * This method is to initialize objects to be used
      */
     private void initObjects() {
-        databaseHelper = new DatabaseHelper(activity);
+        databaseHelper = new DataBaseHandler(activity);
         inputValidation = new InputValidation(activity);
 
     }

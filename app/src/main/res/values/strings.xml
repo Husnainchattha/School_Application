@@ -12,4 +12,17 @@
     <string name="scontact">Contact No:</string>
     <string name="email">Email</string>
     <string name="not_member">No account yet? Create one</string>
+    <string name="error_valid_email_password">Invalid email or password</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_confirm_password">Confirm Password</string>
+    <string name="text_register">Register</string>
+    <string name="success_message">Save Successfully</string>
+    <string name="error_email_exists">Already Exists</string>
+    <string name="error_password_match">password not match</string>
+    <string name="error_message_name">Not correct name</string>
+    <string name="error_message_email">Not correct email</string>
+    <string name="error_message_password">password lessthen 6</string>
+    <string name="error_message_confirmpassword">no match password</string>
 </resources>
